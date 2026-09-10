@@ -36,6 +36,11 @@ let challengeDraft = { id:null, amount:'1500' };
 let channelDemo = { channel:'sms', persona:'pragmatic', branch:'interested', step:0 };
 let authenticated = sessionStorage.getItem('returnlane-demo-auth') === 'true';
 
+function updateLiveClock() {
+  const clock = $('#live-clock');
+  if (clock) clock.innerHTML = `${icon('clock')}${date(new Date(), true)} ET`;
+}
+
 async function load() {
   if (!authenticated) { renderLanding(); return; }
   try { const res = await fetch('/api/state'); if (!res.ok) throw new Error('Could not load the local database.'); state = await res.json(); render(); }
@@ -141,7 +146,7 @@ function render() {
       <button class="workspace-menu-toggle" data-action="workspace-menu" aria-expanded="${mobileNavOpen}">${icon('grid')}<span>${({ overview:'Overview', queue:'Follow-up queue', handoffs:'Salesperson handoffs', channels:'Channel demos', pilot:'Pilot & ROI', activity:'Activity log', safeguards:'Offer safeguards', guide:'Guided demo' })[page]}</span>${icon('chevron')}</button><nav class="${mobileNavOpen ? 'mobile-open' : ''}" aria-label="Main navigation">${navItem('overview','Overview','grid')}${navItem('queue','Follow-up queue','queue',m.eligible)}${navItem('handoffs','Salesperson handoffs','people',handoffCount)}${navItem('channels','Channel demos','message')}${navItem('pilot','Pilot & ROI','chart')}${navItem('activity','Activity log','pulse')}${navItem('safeguards','Offer safeguards','shield')}${navItem('guide','Guided demo','play')}</nav>
       <div class="sidebar-bottom"><div class="local-card"><span class="online-dot"></span><strong>Runs on your computer</strong><p>Fictional leads. Simulated AI,<br>messaging, and calendar.</p><button class="text-button" data-page="guide">What’s real in this demo ${icon('arrow')}</button></div><button class="user" data-action="logout"><span class="user-avatar">GM</span><div><strong>General manager</strong><small>Log out of demo</small></div>${icon('lock')}</button></div>
     </aside>
-    <div class="main-shell"><header class="topbar"><div><span class="breadcrumb">Workspace</span><span class="slash">/</span><strong>${({ overview:'Overview', queue:'Follow-up queue', handoffs:'Salesperson handoffs', channels:'Channel demos', pilot:'Pilot & ROI', activity:'Activity log', safeguards:'Offer safeguards', guide:'Guided demo' })[page]}</strong></div><div class="topbar-right"><span class="demo-pill"><span></span>DEMO MODE</span><span class="clock-label">${icon('clock')}${date(state.now, true)} ET <span class="frozen">· frozen</span></span><button class="topbar-logout" data-action="logout" aria-label="Log out of Returnlane demo">${icon('lock')}Log out</button></div></header>
+    <div class="main-shell"><header class="topbar"><div><span class="breadcrumb">Workspace</span><span class="slash">/</span><strong>${({ overview:'Overview', queue:'Follow-up queue', handoffs:'Salesperson handoffs', channels:'Channel demos', pilot:'Pilot & ROI', activity:'Activity log', safeguards:'Offer safeguards', guide:'Guided demo' })[page]}</strong></div><div class="topbar-right"><span class="demo-pill"><span></span>DEMO MODE</span><span class="clock-label" id="live-clock" aria-label="Current Eastern time">${icon('clock')}${date(new Date(), true)} ET</span><button class="topbar-logout" data-action="logout" aria-label="Log out of Returnlane demo">${icon('lock')}Log out</button></div></header>
     <main id="main">${page === 'overview' ? overview() : page === 'queue' ? queuePage() : page === 'handoffs' ? handoffsPage() : page === 'channels' ? channelDemoPage() : page === 'pilot' ? pilotPage() : page === 'activity' ? activityPage() : page === 'safeguards' ? safeguardsPage() : guidePage()}</main>
     <footer>Built for the follow-up that usually never happens.<span>All activity shown is simulated · No customer messages leave this computer</span></footer></div>
   </div>`;
@@ -362,4 +367,5 @@ function showReset() {
   $('[data-action="cancel-reset"]').focus();
 }
 load();
+setInterval(updateLiveClock, 30000);
 
