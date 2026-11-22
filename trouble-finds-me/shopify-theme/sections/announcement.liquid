@@ -1,0 +1,17 @@
+{%- liquid
+  if settings.preorders_open
+    assign msg = section.settings.text_open
+  else
+    assign msg = section.settings.text_closed
+  endif
+-%}
+{%- if msg != blank -%}<div class="proto" role="note">{{ msg }}</div>{%- endif -%}
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    { "type": "text", "id": "text_closed", "label": "Text while preorders are closed", "default": "Preorders aren't open yet. Join the waitlist for first access." },
+    { "type": "text", "id": "text_open", "label": "Text while preorders are open", "default": "Drop 001 preorders are open. Limited first run." }
+  ]
+}
+{% endschema %}

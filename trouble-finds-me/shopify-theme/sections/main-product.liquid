@@ -1,0 +1,112 @@
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+  assign has_sizes = false
+  if product.has_only_default_variant == false
+    assign has_sizes = true
+  endif
+-%}
+<div class="wrap pdp" data-product>
+  <div class="gallery">
+    <div class="main">
+      {%- if product.featured_media -%}
+        {{ product.featured_media | image_url: width: 1400 | image_tag: id: 'main-img', sizes: '(min-width: 900px) 55vw, 100vw', loading: 'eager' }}
+      {%- else -%}
+        <img id="main-img" src="{{ 'rtt-orange-back.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="768" height="1024">
+      {%- endif -%}
+    </div>
+    {%- if product.media.size > 1 -%}
+      <div class="thumbs">
+        {%- for media in product.media -%}
+          {%- if media.media_type == 'image' -%}
+            <button type="button" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Show image {{ forloop.index }}"
+              data-src="{{ media | image_url: width: 1400 }}" data-alt="{{ media.alt | escape }}">
+              {{ media | image_url: width: 160 | image_tag: alt: '' , loading: 'lazy' }}</button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.caption != blank %}<p class="caption">{{ section.settings.caption }}</p>{% endif -%}
+  </div>
+
+  <div class="buybox">
+    <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+    <h1 style="font-size:clamp(44px,6vw,72px)">{{ product.title }}</h1>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <span class="price" data-price>{{ current.price | money }}</span>
+      {%- if section.settings.badge != blank %}<span class="tag">{{ section.settings.badge }}</span>{% endif -%}
+    </div>
+    <div class="rte">{{ product.description }}</div>
+
+    {%- form 'product', product, id: 'product-form', class: 'stack' -%}
+      <input type="hidden" name="id" value="{{ current.id }}" data-variant-input>
+      {%- if has_sizes -%}
+        <div class="stack" style="gap:10px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <span class="eyebrow" id="size-label">{{ product.options.first }}</span>
+            {%- if section.settings.size_guide_url != blank %}<a href="{{ section.settings.size_guide_url }}" class="eyebrow">Size guide</a>{% endif -%}
+          </div>
+          <div class="sizes" role="group" aria-labelledby="size-label" data-sizes>
+            {%- for v in product.variants -%}
+              <button type="button" data-variant="{{ v.id }}" data-price="{{ v.price | money }}" aria-pressed="false"{% unless v.available %} disabled aria-label="{{ v.title }} sold out"{% endunless %}>{{ v.title }}</button>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+      {%- if settings.preorders_open -%}
+        <div style="display:flex;gap:12px;align-items:center">
+          <label for="qty">Qty</label>
+          <input id="qty" name="quantity" type="number" min="1" max="5" value="1" style="width:90px">
+        </div>
+        <button class="btn red full" type="submit" name="add" data-buy{% if has_sizes %} disabled{% endif %}{% unless product.available %} disabled{% endunless %}>
+          {%- if product.available == false -%}Sold out{%- elsif has_sizes -%}Select a size{%- else -%}{{ section.settings.buy_label }}{%- endif -%}
+        </button>
+      {%- else -%}
+        <a class="btn red full" href="{{ settings.waitlist_url | default: '/pages/waitlist' }}">Join the waitlist</a>
+      {%- endif -%}
+    {%- endform -%}
+
+    <div class="notice"><b>{{ section.settings.notice_title }}</b>
+      <span>{{ section.settings.notice_text }} Shipping window: {{ settings.ship_window | default: "We'll post the exact ship date before preorders open, once our printer confirms it." }}</span>
+      <span>{{ section.settings.notice_refund }}</span>
+    </div>
+
+    <div>
+      {%- for block in section.blocks -%}
+        <details {{ block.shopify_attributes }}{% if forloop.first %} open{% endif %}><summary>{{ block.settings.title }}</summary><div class="rte">{{ block.settings.content }}</div></details>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+<div class="sticky-buy"><div><div class="eyebrow">{{ product.title }}</div><b data-price>{{ current.price | money }}</b></div>
+  {%- if settings.preorders_open -%}<a class="btn red" href="#product-form">Choose size</a>{%- else -%}<a class="btn red" href="{{ settings.waitlist_url | default: '/pages/waitlist' }}">Join the waitlist</a>{%- endif -%}
+</div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org", "@type": "Product",
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | json }},
+  {%- if product.featured_media %}"image": {{ product.featured_media | image_url: width: 1200 | prepend: 'https:' | json }},{% endif %}
+  "brand": {"@type": "Brand", "name": {{ shop.name | json }}},
+  "offers": {"@type": "Offer", "priceCurrency": {{ cart.currency.iso_code | json }}, "price": {{ current.price | divided_by: 100.0 | json }},
+    "availability": "https://schema.org/{% if settings.preorders_open and product.available %}PreOrder{% else %}OutOfStock{% endif %}",
+    "url": {{ request.origin | append: product.url | json }}}
+}
+</script>
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Drop 001" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Preorder" },
+    { "type": "text", "id": "buy_label", "label": "Buy button label", "default": "Preorder" },
+    { "type": "text", "id": "size_guide_url", "label": "Size guide link" },
+    { "type": "text", "id": "caption", "label": "Image caption", "default": "Concept artwork shown. Photos of the actual shirt go up when samples arrive." },
+    { "type": "text", "id": "notice_title", "label": "Preorder box title", "default": "How the preorder works" },
+    { "type": "textarea", "id": "notice_text", "label": "Preorder box text", "default": "We print the run after the preorder window closes, then ship." },
+    { "type": "textarea", "id": "notice_refund", "label": "Refund line", "default": "Cancel for a full refund any time before printing starts." }
+  ],
+  "blocks": [ { "type": "collapsible", "name": "Collapsible tab", "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Fit & fabric" },
+    { "type": "richtext", "id": "content", "label": "Content", "default": "<p>Oversized, boxy fit.</p>" } ] } ]
+}
+{% endschema %}

@@ -1,0 +1,12 @@
+<section class="block"><div class="wrap" style="max-width:820px">
+  {%- for block in section.blocks -%}
+    <details {{ block.shopify_attributes }}><summary>{{ block.settings.question }}</summary><div class="rte">{{ block.settings.answer }}</div></details>
+  {%- endfor -%}
+</div></section>
+{% schema %}
+{ "name": "FAQ",
+  "blocks": [ { "type": "qa", "name": "Question", "settings": [
+    { "type": "text", "id": "question", "label": "Question", "default": "Question" },
+    { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer</p>" } ] } ],
+  "presets": [ { "name": "FAQ" } ] }
+{% endschema %}

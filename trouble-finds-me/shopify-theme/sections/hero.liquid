@@ -1,0 +1,46 @@
+<section class="hero"><div class="grain"></div><div class="wrap">
+  <div>
+    {%- if section.settings.eyebrow != blank %}<div class="eyebrow">{{ section.settings.eyebrow }}</div>{% endif -%}
+    <h1><span>{{ section.settings.line_1 }}</span>{% if section.settings.line_2 != blank %}<span{% if section.settings.script %} class="script" style="font-size:.9em"{% endif %}>{{ section.settings.line_2 }}</span>{% endif %}</h1>
+    {%- if section.settings.text != blank %}<p class="lede">{{ section.settings.text }}</p>{% endif -%}
+    {%- if section.settings.show_waitlist -%}
+      {%- assign fid = 'waitlist-' | append: section.id -%}
+      {% render 'waitlist-form', form_id: fid, button: 'Join the waitlist' %}
+    {%- else -%}
+      <div class="ctas">
+        {%- if section.settings.button_1_label != blank %}<a class="btn" href="{{ section.settings.button_1_link }}">{{ section.settings.button_1_label }}</a>{% endif -%}
+        {%- if section.settings.button_2_label != blank %}<a class="btn ghost" href="{{ section.settings.button_2_link }}">{{ section.settings.button_2_label }}</a>{% endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+  <div class="art">
+    {%- if section.settings.image -%}
+      {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', sizes: '(min-width: 860px) 45vw, 100vw', alt: section.settings.image.alt }}
+    {%- else -%}
+      <img src="{{ section.settings.fallback | asset_url }}" alt="Ride the Tiger tee concept artwork" width="768" height="1024">
+    {%- endif -%}
+    {%- if section.settings.caption != blank %}<p class="caption">{{ section.settings.caption }}</p>{% endif -%}
+  </div>
+</div></section>
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Drop 001 · Ride the Tiger" },
+    { "type": "text", "id": "line_1", "label": "Heading line 1", "default": "Trouble" },
+    { "type": "text", "id": "line_2", "label": "Heading line 2", "default": "finds me." },
+    { "type": "checkbox", "id": "script", "label": "Line 2 in script", "default": false },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Old-school iron culture on heavyweight, boxy pump covers. Loud on the back, quiet on the front, built for the hours nobody sees." },
+    { "type": "checkbox", "id": "show_waitlist", "label": "Show waitlist form instead of buttons", "default": false },
+    { "type": "text", "id": "button_1_label", "label": "Button 1 label", "default": "See the tee" },
+    { "type": "text", "id": "button_1_link", "label": "Button 1 link" },
+    { "type": "text", "id": "button_2_label", "label": "Button 2 label", "default": "Join the waitlist" },
+    { "type": "text", "id": "button_2_link", "label": "Button 2 link" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "select", "id": "fallback", "label": "Fallback image (if none uploaded)", "default": "rtt-orange-back.jpg",
+      "options": [ { "value": "rtt-orange-back.jpg", "label": "Back concept" }, { "value": "rtt-orange-pair.jpg", "label": "Front + back concept" } ] },
+    { "type": "text", "id": "caption", "label": "Caption", "default": "Concept artwork. Not a photo of the finished shirt.", "info": "Remove once you use real product photos." }
+  ],
+  "presets": [ { "name": "Hero" } ]
+}
+{% endschema %}

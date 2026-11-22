@@ -1,0 +1,27 @@
+<footer class="site"><div class="wrap">
+  <div class="footgrid">
+    <div class="stack">
+      <div class="logo">{{ shop.name | upcase }}</div>
+      <p style="color:var(--cream-2)">{{ section.settings.tagline }}</p>
+    </div>
+    <div><div class="eyebrow" style="margin-bottom:8px">{{ section.settings.menu_1.title | default: 'Shop' }}</div>
+      {%- for link in section.settings.menu_1.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}</div>
+    <div><div class="eyebrow" style="margin-bottom:8px">{{ section.settings.menu_2.title | default: 'Help' }}</div>
+      {%- for link in section.settings.menu_2.links -%}<a href="{{ link.url }}">{{ link.title }}</a>{%- endfor -%}
+      {%- if settings.instagram_url != blank %}<a href="{{ settings.instagram_url }}" rel="noopener">Instagram</a>{% endif -%}
+      {%- if settings.tiktok_url != blank %}<a href="{{ settings.tiktok_url }}" rel="noopener">TikTok</a>{% endif -%}
+    </div>
+  </div>
+  <p class="fine">© {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.fineprint }}</p>
+</div></footer>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Old-school iron. Heavyweight cotton. Made for the people who show up anyway." },
+    { "type": "link_list", "id": "menu_1", "label": "First menu", "default": "footer" },
+    { "type": "link_list", "id": "menu_2", "label": "Second menu" },
+    { "type": "text", "id": "fineprint", "label": "Fine print", "default": "Images marked concept artwork are not photos of finished shirts." }
+  ]
+}
+{% endschema %}

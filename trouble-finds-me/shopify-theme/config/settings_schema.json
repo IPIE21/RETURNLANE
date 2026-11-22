@@ -1,0 +1,52 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Trouble Finds Me",
+    "theme_version": "1.0.0",
+    "theme_author": "Trouble Finds Me",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Preorders",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Keep preorders OFF until the product, price, printer, ship date and policies are approved. While off, buy buttons send people to the waitlist and checkout is hidden."
+      },
+      {
+        "type": "checkbox",
+        "id": "preorders_open",
+        "label": "Preorders open",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "ship_window",
+        "label": "Ship window",
+        "info": "Example: Ships by March 20. Leave empty until your printer confirms."
+      },
+      {
+        "type": "text",
+        "id": "waitlist_url",
+        "label": "Waitlist page link",
+        "default": "/pages/waitlist"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "instagram_url",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "tiktok_url",
+        "label": "TikTok URL"
+      }
+    ]
+  }
+]

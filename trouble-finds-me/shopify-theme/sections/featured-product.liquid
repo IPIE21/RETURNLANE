@@ -1,0 +1,30 @@
+{%- assign p = section.settings.product -%}
+<section class="block"><div class="wrap split">
+  {%- if p.featured_media -%}
+    {{ p.featured_media | image_url: width: 1400 | image_tag: loading: 'lazy', sizes: '(min-width: 860px) 50vw, 100vw', style: 'background:var(--cream)' }}
+  {%- else -%}
+    <img src="{{ 'rtt-orange-pair.jpg' | asset_url }}" alt="Ride the Tiger tee concept artwork" width="1536" height="1024" loading="lazy" style="background:var(--cream)">
+  {%- endif -%}
+  <div class="stack">
+    <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+    <h2>{{ section.settings.heading_1 }} {% if section.settings.heading_script != blank %}<span class="script">{{ section.settings.heading_script }}</span>{% endif %}</h2>
+    <p style="color:var(--cream-2)">{{ section.settings.text }}</p>
+    {%- if section.settings.tag != blank %}<div><span class="tag">{{ section.settings.tag }}</span></div>{% endif -%}
+    <div><a class="btn" href="{{ p.url | default: '/collections/all' }}">{{ section.settings.button }}{% if p %} · {{ p.price | money }}{% endif %}</a></div>
+  </div>
+</div></section>
+{% schema %}
+{
+  "name": "Featured product",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The first one" },
+    { "type": "text", "id": "heading_1", "label": "Heading", "default": "Ride the" },
+    { "type": "text", "id": "heading_script", "label": "Heading script word", "default": "Tiger" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "\"Trouble Finds Me\" across the chest. On the back, a jacked old-school bad boy riding a tiger with \"Chew Glass, Breathe Smoke\" over the top. One graphic, one run." },
+    { "type": "text", "id": "tag", "label": "Tag", "default": "Limited first run" },
+    { "type": "text", "id": "button", "label": "Button label", "default": "Details" }
+  ],
+  "presets": [ { "name": "Featured product" } ]
+}
+{% endschema %}

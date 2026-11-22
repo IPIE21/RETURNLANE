@@ -1,0 +1,21 @@
+{%- assign fid = 'waitlist-' | append: section.id -%}
+<section class="block"><div class="wrap split">
+  <div class="stack">
+    <div class="eyebrow">{{ section.settings.eyebrow }}</div>
+    <h2>{{ section.settings.heading }}</h2>
+    <p style="color:var(--cream-2)">{{ section.settings.text }}</p>
+  </div>
+  <div>{% render 'waitlist-form', form_id: fid, button: section.settings.button %}</div>
+</div></section>
+{% schema %}
+{
+  "name": "Waitlist signup",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "First access" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get in before the drop" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "The waitlist hears about preorders first, before we post anywhere. First run is small." },
+    { "type": "text", "id": "button", "label": "Button", "default": "Get early access" }
+  ],
+  "presets": [ { "name": "Waitlist signup" } ]
+}
+{% endschema %}

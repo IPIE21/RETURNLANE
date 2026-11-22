@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Drop 001 \u00b7 First access",
+        "line_1": "Ride the",
+        "line_2": "Tiger",
+        "script": true,
+        "text": "Waitlist members get the preorder link before anyone else. Small first run.",
+        "show_waitlist": true,
+        "fallback": "rtt-orange-pair.jpg"
+      }
+    }
+  },
+  "order": [
+    "hero"
+  ]
+}

@@ -1,0 +1,7 @@
+<a class="card" href="{{ p.url }}">
+  <div class="img">{%- if p.featured_media -%}{{ p.featured_media | image_url: width: 700 | image_tag: loading: 'lazy', sizes: '(min-width: 760px) 33vw, 100vw' }}{%- else -%}<img src="{{ 'rtt-orange-back.jpg' | asset_url }}" alt="" loading="lazy" width="768" height="1024">{%- endif -%}</div>
+  <div class="meta">
+    <span class="tag" style="align-self:flex-start">{% if settings.preorders_open %}Preorder{% else %}Coming soon{% endif %}</span>
+    <h3>{{ p.title }}</h3><span class="eyebrow">{{ p.price | money }}</span>
+  </div>
+</a>

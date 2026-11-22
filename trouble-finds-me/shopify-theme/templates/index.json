@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "button_1_link": "/products/ride-the-tiger",
+        "button_2_link": "/pages/waitlist"
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-product",
+      "settings": {
+        "product": "ride-the-tiger"
+      }
+    },
+    "pillars": {
+      "type": "pillars",
+      "settings": {},
+      "blocks": {
+        "p1": {
+          "type": "pillar",
+          "settings": {
+            "title": "Heavyweight",
+            "text": "Thick cotton that holds its shape over a pump and through a hundred washes. Final fabric weight is confirmed before we sell a single shirt."
+          }
+        },
+        "p2": {
+          "type": "pillar",
+          "settings": {
+            "title": "Boxy cut",
+            "text": "Dropped shoulders, wide body, cropped just right. A pump cover you'll also wear out of the gym."
+          }
+        },
+        "p3": {
+          "type": "pillar",
+          "settings": {
+            "title": "Real graphics",
+            "text": "Screen-printed vintage art, not another motivational quote in a default font."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ]
+    },
+    "waitlist": {
+      "type": "waitlist",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "featured",
+    "pillars",
+    "waitlist"
+  ]
+}

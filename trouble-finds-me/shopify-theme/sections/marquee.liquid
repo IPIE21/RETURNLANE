@@ -1,0 +1,9 @@
+{%- assign t = section.settings.text | append: ' ' -%}
+<div class="marquee" aria-hidden="true"><div>{{ t }}{{ t }}{{ t }}{{ t }}{{ t }}{{ t }}{{ t }}{{ t }}</div></div>
+{% schema %}
+{
+  "name": "Scrolling text",
+  "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "CHEW GLASS ★ BREATHE SMOKE ★ RIDE THE TIGER ★ TROUBLE FINDS ME ★ HEAVYWEIGHT ★ OVERSIZED ★" } ],
+  "presets": [ { "name": "Scrolling text" } ]
+}
+{% endschema %}

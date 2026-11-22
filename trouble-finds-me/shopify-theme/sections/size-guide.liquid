@@ -1,0 +1,19 @@
+<section class="block"><div class="wrap">
+  {%- if section.settings.notice != blank -%}<div class="notice"><b>{{ section.settings.notice_title }}</b><span>{{ section.settings.notice }}</span></div>{%- endif -%}
+  <div class="table-wrap"><table>
+    <thead><tr><th>Size</th><th>Chest (pit to pit)</th><th>Length (shoulder to hem)</th><th>Sleeve</th></tr></thead>
+    <tbody>{%- for block in section.blocks -%}<tr {{ block.shopify_attributes }}><td>{{ block.settings.size }}</td><td>{{ block.settings.chest }}</td><td>{{ block.settings.length }}</td><td>{{ block.settings.sleeve }}</td></tr>{%- endfor -%}</tbody>
+  </table></div>
+  <div class="prose rte" style="margin-top:28px">{{ section.settings.how_to }}</div>
+</div></section>
+{% schema %}
+{ "name": "Size guide",
+  "settings": [
+    { "type": "text", "id": "notice_title", "label": "Notice title", "default": "Target measurements" },
+    { "type": "textarea", "id": "notice", "label": "Notice", "default": "These are the fit targets for Drop 001. We'll measure the production samples and update this table before preorders open." },
+    { "type": "richtext", "id": "how_to", "label": "How to measure", "default": "<h3>How to measure</h3><p>Lay your favorite tee flat. Measure straight across from armpit to armpit for chest, and from the top of the shoulder seam to the hem for length.</p>" } ],
+  "blocks": [ { "type": "row", "name": "Size row", "settings": [
+    { "type": "text", "id": "size", "label": "Size", "default": "M" },
+    { "type": "text", "id": "chest", "label": "Chest" }, { "type": "text", "id": "length", "label": "Length" }, { "type": "text", "id": "sleeve", "label": "Sleeve" } ] } ],
+  "presets": [ { "name": "Size guide" } ] }
+{% endschema %}

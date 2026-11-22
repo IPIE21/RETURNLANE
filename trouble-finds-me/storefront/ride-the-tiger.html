@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ride the Tiger Tee · Trouble Finds Me</title>
+<meta name="description" content="Heavyweight oversized tee. Trouble Finds Me on the chest, Chew Glass Breathe Smoke and the tiger rider on the back.">
+<meta property="og:title" content="Ride the Tiger Tee · Trouble Finds Me">
+<meta property="og:description" content="Heavyweight oversized tee. Trouble Finds Me on the chest, Chew Glass Breathe Smoke and the tiger rider on the back.">
+<meta property="og:image" content="assets/img/rtt-orange-back.jpg">
+<meta name="theme-color" content="#141414">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700&family=JetBrains+Mono:wght@400;600&family=Yellowtail&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<main id="content">
+
+<div class="wrap pdp" id="pdp">
+  <div class="gallery">
+    <div class="main"><img id="main-img" src="assets/img/rtt-orange-back.jpg" alt="Ride the Tiger tee, back" width="768" height="1024"></div>
+    <div class="thumbs">
+      <button type="button" aria-pressed="true" aria-label="Show back" data-src="assets/img/rtt-orange-back.jpg" data-alt="Ride the Tiger tee, back"><img src="assets/img/rtt-orange-back.jpg" alt=""></button>
+      <button type="button" aria-pressed="false" aria-label="Show front" data-src="assets/img/rtt-orange-front.jpg" data-alt="Ride the Tiger tee, front"><img src="assets/img/rtt-orange-front.jpg" alt=""></button>
+    </div>
+    <p class="caption">Concept artwork shown. Photos of the actual shirt go up when samples arrive.</p>
+  </div>
+  <div class="buybox">
+    <div class="eyebrow">Drop 001</div>
+    <h1 style="font-size:clamp(44px,6vw,72px)">Ride the Tiger Tee</h1>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><span class="price" data-price></span><span class="tag">Preorder</span></div>
+    <p style="color:var(--cream-2)">"Trouble Finds Me" across the chest. On the back: a jacked vintage bad boy riding a roaring tiger, with "Chew Glass, Breathe Smoke" up top and "Ride the Tiger" in script below.</p>
+    <div class="stack" style="gap:10px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline"><label id="size-label">Size</label><a href="size-guide.html" class="eyebrow">Size guide</a></div>
+      <div class="sizes" id="sizes" role="group" aria-labelledby="size-label"></div>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <label for="qty">Qty</label>
+      <div class="qty"><button type="button" id="qty-minus" aria-label="Decrease quantity">−</button><output id="qty" for="qty-minus qty-plus">1</output><button type="button" id="qty-plus" aria-label="Increase quantity">+</button></div>
+    </div>
+    <button class="btn red full" type="button" data-buy>Join the waitlist</button>
+    <p id="buy-status" class="form-msg" role="status" aria-live="polite"></p>
+    <div class="notice"><b>How the preorder works</b>
+      <span>We print the run after the preorder window closes, then ship. Shipping window: <span data-ship-window></span></span>
+      <span>Cancel for a full refund any time before printing starts. Details on the <a href="shipping-returns.html">shipping &amp; returns</a> page.</span></div>
+    <div>
+      <details open><summary>Fit &amp; fabric</summary><div>
+        <p>Oversized, boxy fit with dropped shoulders and a thick ribbed collar. Take your normal size for the intended oversized look.</p>
+        <p>Heavyweight 100% cotton blank. The exact weight and blank are being confirmed with samples and will be listed here before preorders open.</p></div></details>
+      <details><summary>Print</summary><div><p>Screen-printed. Front: one color. Back: multi-color vintage graphic with a worn texture that's part of the design.</p></div></details>
+      <details><summary>Care</summary><div><p>Wash cold, inside out. Hang dry or tumble low. Don't iron the print.</p></div></details>
+    </div>
+  </div>
+</div>
+<div class="sticky-buy"><div><div class="eyebrow">Ride the Tiger</div><b data-price></b></div><button class="btn red" type="button" data-buy>Join the waitlist</button></div>
+
+</main>
+<script src="assets/config.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

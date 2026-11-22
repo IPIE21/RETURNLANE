@@ -1,0 +1,15 @@
+{%- comment -%} Usage: {% render 'waitlist-form', form_id: 'waitlist-home', button: 'Join the waitlist' %}
+Signups become Shopify customers subscribed to email marketing, tagged waitlist + drop001 (+ size-XX). {%- endcomment -%}
+{%- form 'customer', id: form_id, class: 'signup' -%}
+  <input type="hidden" name="contact[tags]" value="waitlist,drop001" data-tags>
+  <div class="field"><label for="{{ form_id }}-email">Email</label>
+    <input id="{{ form_id }}-email" name="contact[email]" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+  <div class="field" style="flex:0 1 140px"><label for="{{ form_id }}-size">Your size</label>
+    <select id="{{ form_id }}-size" data-size-tag><option value="">Not sure</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select></div>
+  <label class="check" for="{{ form_id }}-consent"><input id="{{ form_id }}-consent" type="checkbox" required> Email me about Drop 001 and future drops. Unsubscribe anytime.</label>
+  <button class="btn red full" type="submit">{{ button | default: 'Get early access' }}</button>
+  <p class="form-msg{% if form.posted_successfully? %} ok{% elsif form.errors %} err{% endif %}" role="status" aria-live="polite">
+    {%- if form.posted_successfully? -%}You're on the list. Watch your inbox for early access.
+    {%- elsif form.errors -%}{{ form.errors | default_errors }}{%- endif -%}
+  </p>
+{%- endform -%}

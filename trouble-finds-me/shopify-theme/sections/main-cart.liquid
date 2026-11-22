@@ -1,0 +1,33 @@
+<div class="page-head"><div class="wrap"><div class="eyebrow">Your order</div><h1>Cart</h1></div></div>
+<section class="block"><div class="wrap">
+{%- if cart.item_count > 0 -%}
+  <form action="{{ routes.cart_url }}" method="post" id="cart-form">
+    <div class="table-wrap"><table class="cart-table">
+      <thead><tr><th>Item</th><th></th><th>Price</th><th>Qty</th><th>Total</th></tr></thead>
+      <tbody>
+      {%- for item in cart.items -%}
+        <tr>
+          <td>{%- if item.image -%}{{ item.image | image_url: width: 160 | image_tag: alt: item.product.title }}{%- endif -%}</td>
+          <td><a href="{{ item.url }}">{{ item.product.title }}</a>{% unless item.product.has_only_default_variant %}<div class="eyebrow">{{ item.variant.title }}</div>{% endunless %}
+            <a class="eyebrow" href="{{ item.url_to_remove }}">Remove</a></td>
+          <td>{{ item.final_price | money }}</td>
+          <td><label class="eyebrow" for="qty-{{ forloop.index }}" style="position:absolute;left:-9999px">Quantity</label><input id="qty-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" max="5"></td>
+          <td>{{ item.final_line_price | money }}</td>
+        </tr>
+      {%- endfor -%}
+      </tbody>
+    </table></div>
+    <div class="cart-foot">
+      <div class="price">{{ cart.total_price | money }}</div>
+      <p style="color:var(--cream-2);font-size:14px">Shipping and taxes calculated at checkout. Preorder items ship {{ settings.ship_window | default: 'after the preorder window closes' }}.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+        <button class="btn ghost" type="submit" name="update">Update</button>
+        {%- if settings.preorders_open -%}<button class="btn red" type="submit" name="checkout">Checkout</button>{%- else -%}<span class="tag">Checkout opens when preorders do</span>{%- endif -%}
+      </div>
+    </div>
+  </form>
+{%- else -%}
+  <p>Your cart is empty. <a href="{{ routes.all_products_collection_url }}">See Drop 001</a>.</p>
+{%- endif -%}
+</div></section>
+{% schema %}{ "name": "Cart" }{% endschema %}

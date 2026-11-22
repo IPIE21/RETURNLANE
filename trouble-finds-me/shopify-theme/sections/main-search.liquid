@@ -1,0 +1,7 @@
+<div class="page-head"><div class="wrap"><h1>Search</h1>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="signup"><div class="field"><label for="q">Search</label><input id="q" type="search" name="q" value="{{ search.terms | escape }}"></div><button class="btn" type="submit">Search</button></form>
+</div></div>
+{%- if search.performed -%}<section class="block"><div class="wrap"><div class="grid">
+  {%- for item in search.results -%}{%- if item.object_type == 'product' -%}{% render 'product-card', p: item %}{%- else -%}<a class="card" href="{{ item.url }}"><div class="meta" style="padding-top:16px"><h3>{{ item.title }}</h3></div></a>{%- endif -%}{%- else -%}<p>No results.</p>{%- endfor -%}
+</div></div></section>{%- endif -%}
+{% schema %}{ "name": "Search" }{% endschema %}

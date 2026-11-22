@@ -1,0 +1,14 @@
+<div class="page-head"><div class="wrap"><div class="eyebrow">Collection</div><h1>{{ collection.title }}</h1>
+  {%- if collection.description != blank %}<div class="rte" style="margin-top:12px">{{ collection.description }}</div>{% endif -%}</div></div>
+<section class="block"><div class="wrap">
+  {%- paginate collection.products by 24 -%}
+  <div class="grid">
+    {%- for p in collection.products -%}{% render 'product-card', p: p %}{%- else -%}<p>Nothing here yet. <a href="{{ settings.waitlist_url | default: '/pages/waitlist' }}">Join the waitlist</a>.</p>{%- endfor -%}
+    {%- if section.settings.show_next -%}<div class="card soon"><div class="img">Next drop</div><div class="meta"><h3>To be announced</h3><span class="eyebrow">Waitlist hears first</span></div></div>{%- endif -%}
+  </div>
+  {%- if paginate.pages > 1 -%}<div class="pagination">{{ paginate | default_pagination }}</div>{%- endif -%}
+  {%- endpaginate -%}
+</div></section>
+{% schema %}
+{ "name": "Collection", "settings": [ { "type": "checkbox", "id": "show_next", "label": "Show 'next drop' card", "default": true } ] }
+{% endschema %}

@@ -1,0 +1,17 @@
+<section class="block"><div class="wrap split" style="align-items:start">
+  {%- form 'contact', id: 'contact-form', class: 'signup' -%}
+    {%- if form.posted_successfully? -%}<p class="form-msg ok" role="status">Sent. We'll reply within 2 business days.</p>{%- endif -%}
+    {%- if form.errors -%}<p class="form-msg err" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+    <div class="field" style="flex-basis:100%"><label for="c-name">Name</label><input id="c-name" name="contact[name]" autocomplete="name" required></div>
+    <div class="field" style="flex-basis:100%"><label for="c-email">Email</label><input id="c-email" name="contact[email]" type="email" autocomplete="email" required></div>
+    <div class="field" style="flex-basis:100%"><label for="c-topic">Topic</label><select id="c-topic" name="contact[topic]"><option>Sizing</option><option>My order</option><option>Gym / club collab</option><option>Other</option></select></div>
+    <div class="field" style="flex-basis:100%"><label for="c-msg">Message</label><textarea id="c-msg" name="contact[body]" required></textarea></div>
+    <button class="btn red full" type="submit">Send message</button>
+  {%- endform -%}
+  <div class="prose rte">{{ section.settings.side }}</div>
+</div></section>
+{% schema %}
+{ "name": "Contact form", "settings": [
+  { "type": "richtext", "id": "side", "label": "Side text", "default": "<h3>Gyms & clubs</h3><p>Run a lifting club or gym? We do small collab runs. Pick \"Gym / club collab\" and tell us about your crew.</p>" } ],
+  "presets": [ { "name": "Contact form" } ] }
+{% endschema %}

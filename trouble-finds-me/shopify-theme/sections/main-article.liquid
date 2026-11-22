@@ -1,0 +1,3 @@
+<div class="page-head"><div class="wrap"><div class="eyebrow">{{ article.published_at | date: '%b %d, %Y' }}</div><h1>{{ article.title }}</h1></div></div>
+<section class="block"><div class="wrap"><div class="prose rte">{{ article.content }}</div></div></section>
+{% schema %}{ "name": "Article" }{% endschema %}

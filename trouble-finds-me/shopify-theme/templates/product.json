@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "size_guide_url": "/pages/size-guide"
+      },
+      "blocks": {
+        "fit": {
+          "type": "collapsible",
+          "settings": {
+            "title": "Fit & fabric",
+            "content": "<p>Oversized, boxy fit with dropped shoulders and a thick ribbed collar. Take your normal size for the intended oversized look.</p><p>Heavyweight 100% cotton blank. The exact weight and blank are being confirmed with samples and will be listed here before preorders open.</p>"
+          }
+        },
+        "print": {
+          "type": "collapsible",
+          "settings": {
+            "title": "Print",
+            "content": "<p>Screen-printed. Front: one color. Back: multi-color vintage graphic with a worn texture that's part of the design.</p>"
+          }
+        },
+        "care": {
+          "type": "collapsible",
+          "settings": {
+            "title": "Care",
+            "content": "<p>Wash cold, inside out. Hang dry or tumble low. Don't iron the print.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "fit",
+        "print",
+        "care"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,12 @@
+<div class="page-head"><div class="wrap"><div class="eyebrow">{{ section.settings.eyebrow }}</div><h1>{{ page.title }}</h1></div></div>
+{%- if page.content != blank -%}
+<section class="block"><div class="wrap{% if section.settings.with_image %} split{% endif %}" style="align-items:start">
+  <div class="prose rte">{{ page.content }}</div>
+  {%- if section.settings.with_image -%}<img src="{{ 'rtt-orange-back.jpg' | asset_url }}" alt="Ride the Tiger back graphic" loading="lazy" width="768" height="1024" style="background:var(--cream)">{%- endif -%}
+</div></section>
+{%- endif -%}
+{% schema %}
+{ "name": "Page", "settings": [
+  { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+  { "type": "checkbox", "id": "with_image", "label": "Show artwork beside text", "default": false } ] }
+{% endschema %}

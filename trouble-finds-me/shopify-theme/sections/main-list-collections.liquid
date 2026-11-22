@@ -1,0 +1,7 @@
+<div class="page-head"><div class="wrap"><h1>Shop</h1></div></div>
+<section class="block"><div class="wrap"><div class="grid">
+  {%- for c in collections -%}{%- unless c.handle == 'frontpage' -%}
+    <a class="card" href="{{ c.url }}"><div class="img">{%- if c.featured_image -%}{{ c.featured_image | image_url: width: 700 | image_tag: loading: 'lazy' }}{%- endif -%}</div><div class="meta"><h3>{{ c.title }}</h3></div></a>
+  {%- endunless -%}{%- endfor -%}
+</div></div></section>
+{% schema %}{ "name": "Collections list" }{% endschema %}
